@@ -1,39 +1,37 @@
-const btn = document.getElementById("calculate");
 
-function calculate(){
-  let height = document.querySelector("#height").value;
-  let weight = document.querySelector("#weight").value;
+var height = document.getElementById("height");
+var weight = document.getElementById("weight");
 
-  if (height == "" || weight == "") {
-    alert("Please fill out the input fields!");
-    return;
-  }
+var form = document.getElementById("form");
+let resultArea = document.querySelector(".comment");
 
-  // BMI = weight in KG / (height in m * height in m)
+function countBmi(){
+  var p = [height.value, weight.value];
 
-  height = height / 100;
+  var bmi = Number(p[1])/(Number(p[0])/100*Number(p[0])/100);
+      
+  var result = '';
+  if(bmi<18.5){
+    result = 'Underweight';
+     }else if(18.5<=bmi&&bmi<=24.9){
+    result = 'Healthy';
+     }else if(25<=bmi&&bmi<=29.9){
+    result = 'Overweight';
+     }else if(30<=bmi&&bmi<=34.9){
+    result = 'Obese';
+     }else if(35<=bmi){
+    result = 'Extremely obese';
+     }
 
-  let BMI = weight / (height * height);
 
-  BMI = BMI.toFixed(2);
 
-  document.querySelector("#result").innerHTML = BMI;
+resultArea.style.display = "block";
+document.querySelector(".comment").innerHTML = `You are <span id="comment">${result}</span>`;
+document.querySelector("#result").innerHTML = bmi.toFixed(2);
 
-  let status = "";
+}
 
-  if (BMI < 18.5) {
-    status = "Underweight";
-  }
-  if (BMI >= 18.5 && BMI < 25) {
-    status = "Healthy";
-  }
-  if (BMI >= 25 && BMI < 30) {
-    status = "Overweight";
-  }
-  if (BMI >= 30) {
-    status = "Obese";
-  }
-  document.querySelector(
-    ".comment"
-  ).innerHTML = `Comment: you are <span id="comment">${status}</span>`;
-};
+
+
+
+
